@@ -20,20 +20,20 @@ class ProductDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_product_detail)
         setSupportActionBar(toolbar)
 
-        fabEdit.setOnClickListener {
-            val intent = Intent(this, ProductFormActivity::class.java)
-            intent.putExtra("ep.rest.product", product)
-            startActivity(intent)
-        }
+//        fabEdit.setOnClickListener {
+//            val intent = Intent(this, ProductFormActivity::class.java)
+//            intent.putExtra("ep.rest.product", product)
+//            startActivity(intent)
+//        }
 
-        fabDelete.setOnClickListener {
-            val dialog = AlertDialog.Builder(this)
-            dialog.setTitle("Confirm deletion")
-            dialog.setMessage("Are you sure?")
-            dialog.setPositiveButton("Yes") { _, _ -> deleteBook() }
-            dialog.setNegativeButton("Cancel", null)
-            dialog.create().show()
-        }
+//        fabDelete.setOnClickListener {
+//            val dialog = AlertDialog.Builder(this)
+//            dialog.setTitle("Confirm deletion")
+//            dialog.setMessage("Are you sure?")
+//            dialog.setPositiveButton("Yes") { _, _ -> deleteBook() }
+//            dialog.setNegativeButton("Cancel", null)
+//            dialog.create().show()
+//        }
 
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
