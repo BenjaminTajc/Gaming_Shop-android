@@ -19,8 +19,8 @@ object ProductService {
         @GET("products")
         fun getAll(): Call<List<Product>>
 
-        @GET("products/{id}")
-        fun get(@Path("id") id: Int): Call<Product>
+        @GET("product")
+        fun get(@Query("id") id: Int): Call<Product>
 
         @FormUrlEncoded
         @POST("products")

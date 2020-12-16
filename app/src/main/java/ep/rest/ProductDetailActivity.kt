@@ -11,6 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
+import java.util.*
 
 class ProductDetailActivity : AppCompatActivity() {
     private var product: Product = Product()
@@ -71,7 +72,9 @@ class ProductDetailActivity : AppCompatActivity() {
             Log.i(tag, "Got result: ${activity.product}")
 
             if (response.isSuccessful) {
-                activity.tvBookDetail.text = activity.product.opis
+                activity.produkt_ime.text = String.format("Name: %s",activity.product.ime)
+                activity.produkt_opis.text = String.format("Description: %s",activity.product.opis)
+                activity.produkt_cena.text = String.format(Locale.ENGLISH, "Price: %.2f EUR", activity.product.cena)
                 activity.toolbarLayout.title = activity.product.ime
             } else {
                 val errorMessage = try {
@@ -81,7 +84,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 }
 
                 Log.e(tag, errorMessage)
-                activity.tvBookDetail.text = errorMessage
+                activity.produkt_opis.text = errorMessage
             }
         }
 
