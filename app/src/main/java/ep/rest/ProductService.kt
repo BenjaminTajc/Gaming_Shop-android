@@ -38,6 +38,11 @@ object ProductService {
 
         @DELETE("products/{id}")
         fun delete(@Path("id") id: Int): Call<Void>
+
+        @FormUrlEncoded
+        @POST("login")
+        fun login(@Field("email") email: String,
+                  @Field("geslo") geslo: String): Call<Void>
     }
 
     val instance: RestApi by lazy {

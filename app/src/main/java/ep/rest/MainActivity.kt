@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), Callback<List<Product>> {
 
         container.setOnRefreshListener { ProductService.instance.getAll().enqueue(this) }
 
-        btnSave.setOnClickListener {
+        login.setOnClickListener {
             val intent = Intent(this, ProductFormActivity::class.java)
             startActivity(intent)
         }

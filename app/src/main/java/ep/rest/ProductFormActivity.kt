@@ -18,7 +18,7 @@ class ProductFormActivity : AppCompatActivity(), Callback<Void> {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_form)
 
-        btnSave.setOnClickListener {
+        login.setOnClickListener {
             val ime = etTitle.text.toString().trim()
             val opis = etDescription.text.toString().trim()
             val cena = etPrice.text.toString().trim().toDouble()
