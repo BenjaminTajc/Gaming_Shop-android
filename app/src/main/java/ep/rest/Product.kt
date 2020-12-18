@@ -8,4 +8,5 @@ data class Product(
         val opis: String = "",
         val cena: Double = 0.0,
         val isActive: Int = 0,
+        val img_name: String = "",
         val creatorId: Int = 0) : Serializable

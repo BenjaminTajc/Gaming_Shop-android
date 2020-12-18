@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_product_detail.*
 import kotlinx.android.synthetic.main.content_product_detail.*
@@ -46,7 +47,7 @@ class ProductDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun deleteBook(){
+    private fun deleteBook() {
         ProductService.instance.delete(this.product.id).enqueue(object : Callback<Void> {
             private val tag = this::class.java.canonicalName
 
@@ -55,7 +56,7 @@ class ProductDetailActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                if(response.isSuccessful) {
+                if (response.isSuccessful) {
                     val intent = Intent(getApplicationContext(), MainActivity::class.java)
                     startActivity(intent)
                 }
@@ -72,9 +73,19 @@ class ProductDetailActivity : AppCompatActivity() {
             Log.i(tag, "Got result: ${activity.product}")
 
             if (response.isSuccessful) {
-                activity.produkt_ime.text = String.format("Name: %s",activity.product.ime)
-                activity.produkt_opis.text = String.format("Description: %s",activity.product.opis)
+                activity.produkt_ime.text = String.format("Name: %s", activity.product.ime)
+                activity.produkt_opis.text = String.format("Description: %s", activity.product.opis)
                 activity.produkt_cena.text = String.format(Locale.ENGLISH, "Price: %.2f EUR", activity.product.cena)
+
+                val imageView = activity.findViewById<ImageView>(R.id.imageView3)
+                val imgName = activity.product.img_name
+                if (imgName == "cod.jpeg") {
+                    imageView.setImageResource(R.drawable.cod)
+                } else if (imgName == "lol.jpeg") {
+                    imageView.setImageResource(R.drawable.lol)
+                } else if (imgName == "wow.jpeg") {
+                    imageView.setImageResource(R.drawable.wow)
+                }
                 activity.toolbarLayout.title = activity.product.ime
             } else {
                 val errorMessage = try {
