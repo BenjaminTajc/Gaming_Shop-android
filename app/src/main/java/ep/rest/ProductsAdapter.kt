@@ -18,14 +18,12 @@ class ProductsAdapter(context: Context) : ArrayAdapter<Product>(context, 0, Arra
             convertView
 
         val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
-        val tvAuthor = view.findViewById<TextView>(R.id.tvAuthor)
         val tvPrice = view.findViewById<TextView>(R.id.tvPrice)
 
 
         val product = getItem(position)
 
         tvTitle.text = product?.ime
-        tvAuthor.text = product?.opis
         tvPrice.text = String.format(Locale.ENGLISH, "%.2f EUR", product?.cena)
 
         return view

@@ -32,4 +32,9 @@
         android:layout_height="wrap_content"
         android:text="Vpis" />
 
+    <TextView
+        android:id="@+id/Message"
+        android:layout_width="match_parent"
+        android:layout_height="41dp" />
+
 </LinearLayout>

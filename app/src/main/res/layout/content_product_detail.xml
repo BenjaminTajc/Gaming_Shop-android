@@ -8,18 +8,36 @@
     tools:context="ep.rest.ProductDetailActivity"
     tools:showIn="@layout/activity_product_detail">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="3">
 
-        <TextView
-            android:id="@+id/produkt_ime"
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/produkt_cena"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="3"
             android:gravity="start|center_vertical"
-            android:textSize="30sp" />
+            android:text="Placeholder"
+            android:textColor="@color/text_color_default"
+            android:textColorHint="@color/text_color_default"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
         <TextView
             android:id="@+id/produkt_opis"
@@ -27,23 +45,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:gravity="start|center_vertical"
-            android:textSize="30sp" />
+            android:text="Placeholder"
+            android:textColor="@color/text_color_default"
+            android:textColorHint="@color/text_color_default"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/produkt_cena"
+            app:layout_constraintTop_toBottomOf="@+id/produkt_cena" />
 
-        <TextView
-            android:id="@+id/produkt_cena"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="start|center_vertical"
-            android:textSize="30sp" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"/>
-    </LinearLayout>
-
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="ep.rest.ProductDetailActivity">
+    tools:context="ep.rest.ProductDetailActivity"
+    android:background= "@color/background_color"
+    android:textColor="@color/text_color_default">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"

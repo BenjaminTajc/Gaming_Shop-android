@@ -1,11 +1,11 @@
 package ep.rest
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_product_detail.*
 import kotlinx.android.synthetic.main.content_product_detail.*
 import retrofit2.Call
@@ -73,19 +73,16 @@ class ProductDetailActivity : AppCompatActivity() {
             Log.i(tag, "Got result: ${activity.product}")
 
             if (response.isSuccessful) {
-                activity.produkt_ime.text = String.format("Name: %s", activity.product.ime)
                 activity.produkt_opis.text = String.format("Description: %s", activity.product.opis)
                 activity.produkt_cena.text = String.format(Locale.ENGLISH, "Price: %.2f EUR", activity.product.cena)
 
                 val imageView = activity.findViewById<ImageView>(R.id.imageView3)
                 val imgName = activity.product.img_name
-                if (imgName == "cod.jpeg") {
-                    imageView.setImageResource(R.drawable.cod)
-                } else if (imgName == "lol.jpeg") {
-                    imageView.setImageResource(R.drawable.lol)
-                } else if (imgName == "wow.jpeg") {
-                    imageView.setImageResource(R.drawable.wow)
-                }
+                val imgBase = "http://10.0.2.2:8080/dev/Gaming_Shop/static/slike/"
+                val imgUrl = imgBase + imgName
+                Picasso.get()
+                        .load(imgUrl)
+                        .into(imageView)
                 activity.toolbarLayout.title = activity.product.ime
             } else {
                 val errorMessage = try {
