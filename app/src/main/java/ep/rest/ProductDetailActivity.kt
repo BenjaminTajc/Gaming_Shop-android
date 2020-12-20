@@ -3,6 +3,7 @@ package ep.rest
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
@@ -15,53 +16,50 @@ import java.io.IOException
 import java.util.*
 
 class ProductDetailActivity : AppCompatActivity() {
+    private val tag = ProductDetailActivity::class.java.canonicalName
     private var product: Product = Product()
+    private var loggedIn: Boolean? = false
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
         setSupportActionBar(toolbar)
 
-//        fabEdit.setOnClickListener {
-//            val intent = Intent(this, ProductFormActivity::class.java)
-//            intent.putExtra("ep.rest.product", product)
-//            startActivity(intent)
-//        }
-
-//        fabDelete.setOnClickListener {
-//            val dialog = AlertDialog.Builder(this)
-//            dialog.setTitle("Confirm deletion")
-//            dialog.setMessage("Are you sure?")
-//            dialog.setPositiveButton("Yes") { _, _ -> deleteBook() }
-//            dialog.setNegativeButton("Cancel", null)
-//            dialog.create().show()
-//        }
-
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val id = intent.getIntExtra("ep.rest.id", 0)
+        loggedIn = intent.getBooleanExtra("loggedIn", false)
+
+        if(loggedIn == true) {
+            user = intent.getSerializableExtra("user") as User
+        }
 
         if (id > 0) {
             ProductService.instance.get(id).enqueue(OnLoadCallbacks(this))
         }
     }
 
-    private fun deleteBook() {
-        ProductService.instance.delete(this.product.id).enqueue(object : Callback<Void> {
-            private val tag = this::class.java.canonicalName
-
-            override fun onFailure(call: Call<Void>, t: Throwable) {
-                Log.w(tag, "Error: ${t.message}", t)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        Log.i(tag, "OnOptionsItemSelected")
+        if(id == android.R.id.home) {
+            super.onBackPressed()
+            val returnIntent = Intent(this, MainActivity::class.java)
+            val bundle = Bundle()
+            bundle.putBoolean("loggedIn", loggedIn as Boolean)
+            if (loggedIn == true) {
+                bundle.putSerializable("loggedIn", user)
             }
+            Log.i(tag, "Return")
+            Log.i(tag, loggedIn.toString())
+            Log.i(tag, user.toString())
+            returnIntent.putExtras(bundle)
+            startActivity(returnIntent)
+            finish()
+        }
 
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                if (response.isSuccessful) {
-                    val intent = Intent(getApplicationContext(), MainActivity::class.java)
-                    startActivity(intent)
-                }
-            }
-        })
+        return super.onOptionsItemSelected(item)
     }
 
     private class OnLoadCallbacks(val activity: ProductDetailActivity) : Callback<Product> {
@@ -95,6 +93,8 @@ class ProductDetailActivity : AppCompatActivity() {
                 activity.produkt_opis.text = errorMessage
             }
         }
+
+
 
         override fun onFailure(call: Call<Product>, t: Throwable) {
             Log.w(tag, "Error: ${t.message}", t)

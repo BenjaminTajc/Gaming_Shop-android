@@ -42,7 +42,7 @@ object ProductService {
         @FormUrlEncoded
         @POST("login")
         fun login(@Field("email") email: String,
-                  @Field("geslo") geslo: String): Call<Void>
+                  @Field("geslo") geslo: String): Call<User>
     }
 
     val instance: RestApi by lazy {
